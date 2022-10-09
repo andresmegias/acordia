@@ -10,3 +10,9 @@ After running Acordia, several plots will be shown: first, an scheme of the guit
 Acordia uses the libraries PyYAML, NumPy and Matplotlib, and its neural network was trained using the library Keras (built with TensorFlow).
 
 **Some examples**
+
+F chord, standard tuning:
+![image1](example-images/F-standard.jpg?raw=true)
+
+F chord, all-fourths tuning:
+![image2](example-images/F-allfourths.jpg?raw=true)
