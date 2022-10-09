@@ -884,8 +884,6 @@ ps = copy.copy(ps13)
 
 #%% Plots of the bar charts.
 
-use_realistic_frets = False
-
 fx = 0.75  # horizontal scale factor
 marg = 0.07  # margin
 ms = 34  # markersize
@@ -899,7 +897,8 @@ plot_diagrs(diagrs, ps)
 nh = 15
 Nh = len(diagrs) // nh+1
 
-if use_neural_network:
+show_discarded_chords = False
+if use_neural_network and show_discarded_chords:
     plot_diagrs(diagrs_no, ps_no, h0=Nh, colors=['dimgray','gray'])   
 
 plt.show()

@@ -1,8 +1,8 @@
 # Strings and chord.
-string notes: 'E2,A2,D3,G3,C4,F4'
+string notes: 'E2,A2,D3,G3,B3,E4'
 number of frets: 12
 capo fret: 0  
-chord: 'C'
+chord: 'F'
 
 # Graphical options.
 show note names: yes
@@ -22,7 +22,7 @@ image format: 'jpg'
 # Chord examples:
 # C, C7, Caug, Dm, Eb, Em, E5, F, FM7, G7, Am7, Bdis, Bb, Cbm, C5
 # Equivalence eamples:
-# C = (C,E,G)'
+# C = (C,E,G)
 # G7 = (G,B,D,F)
 # Eb = (Eb,G,Bb)
 # E5 = (E,B)
