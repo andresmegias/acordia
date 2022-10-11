@@ -311,7 +311,7 @@ if len(strings.split(',')) != 6:
 
 if use_neural_network:
     pos_conf = []
-    with open('confirmed_positions.txt', 'r') as file:
+    with open('confirmed-positions.txt', 'r') as file:
         for line in file:
             line = line.strip()
             line = line.replace('[','').replace(']','').replace(' ','')
