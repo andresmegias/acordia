@@ -1,5 +1,4 @@
 # Acordia
-_Guitar chord chart generator_
 
 Acordia is a Python 3 script intended to create guitar chord charts for any guitar tuning and any chord. The tuning, chord and some other options are specified in configuration file with YAML formatting style. The script contains an artificial neural network that helps to determine which potential fret diagrams are actually playable.
 
