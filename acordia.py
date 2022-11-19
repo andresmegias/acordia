@@ -308,20 +308,7 @@ show_chords_4frets = config['show chords with 4 frets']
 
 if len(strings.split(',')) != 6:
     use_neural_network = False
-
-if use_neural_network:
-    pos_conf = []
-    with open('confirmed-positions.txt', 'r') as file:
-        for line in file:
-            line = line.strip()
-            line = line.replace('[','').replace(']','').replace(' ','')
-            line = line.split(',')
-            line = [int(l) for l in line]
-            pos_conf += [line]     
-    pos_conf = np.array(pos_conf)   
-    weights = np.load('weights.npy', allow_pickle=True)
         
-
 strings = strings.split(',') 
 
 octave = ['E','F','F#','G','G#','A','A#','B','C','C#','D','D#']
@@ -812,17 +799,10 @@ diagrs11 = []
 ps11 = []
 y10 = []
 if use_neural_network:
+    weights = np.load('weights.npy', allow_pickle=True)
     for d in range(len(diagrs10)):
         x = equivalent_positions(positions(diagrs10[d]))
-        y = 0
-        for i in range(len(pos_conf)):
-            xi = np.array(pos_conf[i])
-            if np.array_equal(x,xi):
-                y = 1
-                break
-        # print(x,y, binarize([model(x, weights)])[0])
-        if y == 0:
-            y = binarize([model(x, weights)])[0]
+        y = binarize([model(x, weights)])[0]
         y10 += [y]
 
 repeateds = []
