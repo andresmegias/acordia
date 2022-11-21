@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Acordia.
+Acordia
 Copyright (C) 2022 - Andrés Megías
 
 This program is free software: you can redistribute it and/or modify
