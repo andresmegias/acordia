@@ -445,7 +445,6 @@ y = sketch[1] + Nt
 x1 = sketch1[0] + 1
 y1 = sketch1[1] + Nt
 
-
 notes_text = []
 for i in range(len(x)):
     ind_diagr = int(octave.index(strings[x[i]-1][:-1])+y[i]-Nt)%12
@@ -461,7 +460,6 @@ notes_text = np.array(notes_text)
 
 y = -fret_distance(y, show_realistic_frets)
 y1 = -fret_distance(y1, show_realistic_frets)
-
 
 figsize = (0.6*(2+fx*6),
            0.6*(3 + fret_distance(Nt+Np, show_realistic_frets)
@@ -492,7 +490,6 @@ if show_note_names:
         plt.text(fx*x[i], y[i]-dy, notes_text[i], color='white',
                  horizontalalignment='center', verticalalignment='center',
                  fontsize=fs)
-
 
 xlocs = fx*np.linspace(1,Nc,Nc)
 xlabels = copy.copy(strings)
@@ -732,7 +729,6 @@ for d in range(len(diagrs7)):
     diagrs8 += [diagr]
     ps8 += [p]
 
-
 diagrs9 = []
 ps9 = []
 for d in range(len(diagrs8)):
@@ -750,14 +746,12 @@ for d in range(len(diagrs8)):
         Ntp -= sketch[:,1].sum() - 1
     if Ntp <= 4:
         diagrs9 += [diagrs8[d]]
-        ps9 += [ps8[d]]
-        
+        ps9 += [ps8[d]]     
 
 if show_chords_4frets:
     dplim = 4
 else:
     dplim = 3
-
 
 diagrs10 = []
 ps10 = []
@@ -844,7 +838,6 @@ inds = np.argsort(ps11)
 
 diagrs12 = [diagrs11[i] for i in inds]
 ps12 = [ps11[i] for i in inds]
-
 
 if use_neural_network:
     y12 = np.array([y11[i] for i in inds])
