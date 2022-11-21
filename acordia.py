@@ -882,34 +882,3 @@ if use_neural_network and show_discarded_chords:
     plot_diagrs(diagrs_no, ps_no, h0=Nh, colors=['dimgray','gray'])   
 
 plt.show()
-
-#%% Create files for training the neural network.
-
-train_nn = False
-
-data = []
-
-for diagr, p in zip(diagrs, ps):
-    cx = (diagr!=0).astype(int).sum(axis=1)
-    x = np.zeros(Nc, int)
-    cp = (diagr[:,:]!=0).astype(int).nonzero()
-    ci = cp[0]
-    pi = cp[1]
-    x[ci] = pi
-    data += [[list(cx), list(x),0]]
-    
-if train_nn:
-    with open('data-'+figname+'.txt', 'w') as file:
-        for line in data:
-            file.write(str(line)+'\n')
-
-# Check.
-if train_nn:
-    data2 = []
-    with open('data-'+figname+'.txt', 'r') as file:
-        for line in file:
-            line = line.strip()
-            line = line.replace('[','').replace(']','').replace(' ','')
-            line = line.split(',')
-            line = [int(l) for l in line]
-            data2 += [[line[6:12], line[12]]]
