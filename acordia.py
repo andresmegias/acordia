@@ -694,19 +694,19 @@ for d in range(len(diagrs5)):
 
 no = []
 for d in range(len(diagrs6)):
-    notas_diagr = []
+    notes_diagr = []
     cd = diagrs6[d].nonzero()[0]
     pd = diagrs6[d].nonzero()[1]
     for i in range(len(cd)):
         if pd[i] != 0:
             ind = int(octave.index(strings[cd[i]][:-1])+pd[i]+ps6[d]-1)%12
-            notas_diagr += [octave[ind]]
+            notes_diagr += [octave[ind]]
         else:
             ind = int(octave.index(strings[cd[i]][:-1])+pd[i])%12
-            notas_diagr += [octave[ind]]
+            notes_diagr += [octave[ind]]
     
-    for nota in chord:
-        if nota not in notas_diagr and d not in no:
+    for note in chord:
+        if note not in notes_diagr and d not in no:
             no += [d]
 
 diagrs7 = []
@@ -896,7 +896,7 @@ for diagr, p in zip(diagrs, ps):
     ci = cp[0]
     pi = cp[1]
     x[ci] = pi
-    data += [[list(cx),list(x),0]]
+    data += [[list(cx), list(x),0]]
     
 if train_nn:
     with open('data-'+figname+'.txt', 'w') as file:
