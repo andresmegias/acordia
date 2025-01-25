@@ -277,7 +277,7 @@ def plot_diagrs(diagrs, ps, h0=0, colors=['mediumblue','steelblue']):
             else:
                 numtable = '_' + str(h+1)
             plt.figure(h+2)
-            plt.savefig('table-'+ figname + numtable + '.' + img_format,
+            plt.savefig('chart-'+ figname + numtable + '.' + img_format,
                         dpi=200)
             
 plt.close('all')
