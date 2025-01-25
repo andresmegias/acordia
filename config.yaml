@@ -1,5 +1,6 @@
 # Strings and chord.
 string notes: 'E2,A2,D3,G3,B3,E4'
+tuning name: 'standard'
 number of frets: 12
 capo fret: 0  
 chord: 'F'
@@ -8,7 +9,7 @@ chord: 'F'
 show note names: yes
 show realistic frets: yes
 use neural network: yes     
-save images: no
+save images: yes
 image format: 'jpg'
 
 # Some options for string tunings:
