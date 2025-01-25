@@ -3,7 +3,7 @@
 
 """
 Acordia
-Copyright (C) 2022 - Andrés Megías
+Copyright (C) 2025 - Andrés Megías (github.com/andresmegias)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -279,6 +279,8 @@ def plot_diagrs(diagrs, ps, h0=0, colors=['mediumblue','steelblue']):
             plt.figure(h+2)
             plt.savefig('table-'+ figname + numtable + '.' + img_format,
                         dpi=200)
+            
+plt.close('all')
 
 #%% Loading of the configuration file and setting up.
 
@@ -290,6 +292,7 @@ with open(config_file, 'r') as file:
 
 default_options = {
         'strings': ['E2,A2,D3,G3,B3,E4'],
+        'tuning name': None,
         'number of frets': 12,
         'capo fret': 0,
         'show realistic frets': True,
@@ -304,6 +307,7 @@ default_options = {
 config = {**default_options, **config}
 
 strings = config['string notes']
+tuning = config['tuning name']
 Np = config['number of frets']
 Nt = config['capo fret']
 chord = config['chord']
@@ -493,7 +497,6 @@ plt.plot(fx*x1[y1==0], y1[y1==0], '.', ms=ms, color=color1, clip_on=False)
 plt.plot(fx*1, -fret_distance(Nt) + 0.02, '.', ms=ms, color='red', alpha=0,
          clip_on=False)
 
-
 if show_note_names:
     for i in range(len(y)):
         plt.text(fx*x[i], y[i]-dy, notes_text[i], color='white',
@@ -544,10 +547,14 @@ if Nt == 0:
     namecapo = ''
 else:
     namecapo = '-(+' + str(Nt) + ')'
-figname = '('+','.join(strings)+')' + namecapo + '-' + title
+
+nametuning = ('('+','.join(strings)+')' if tuning is None
+              else tuning.replace(' ','').replace('-',''))
+
+figname = nametuning + namecapo + '-' + title
 
 if save_figures:
-    plt.savefig(figname + '.' +  img_format, dpi=200)
+    plt.savefig('fretboard-' + figname + '.' +  img_format, dpi=200)
 
 #%% Calculation of the bar charts.
 
@@ -755,7 +762,7 @@ for d in range(len(diagrs8)):
         Ntp -= sketch[:,1].sum() - 1
     if Ntp <= 4:
         diagrs9 += [diagrs8[d]]
-        ps9 += [ps8[d]]     
+        ps9 += [ps8[d]] 
 
 if show_chords_4frets:
     dplim = 4
@@ -848,6 +855,7 @@ inds = np.argsort(ps11)
 diagrs12 = [diagrs11[i] for i in inds]
 ps12 = [ps11[i] for i in inds]
 
+
 if use_neural_network:
     y12 = np.array([y11[i] for i in inds])
     inds1 = (y12 == 1).nonzero()[0]
@@ -862,7 +870,6 @@ else:
 
 diagrs = copy.copy(diagrs13)
 ps = copy.copy(ps13)
-
 
 #%% Plots of the bar charts.
 
@@ -884,3 +891,34 @@ if use_neural_network and show_discarded_chords:
     plot_diagrs(diagrs_no, ps_no, h0=Nh, colors=['dimgray','gray'])   
 
 plt.show()
+
+#%% Create files for training the neural network.
+
+train_nn = False
+
+data = []
+
+for diagr, p in zip(diagrs, ps):
+    cx = (diagr!=0).astype(int).sum(axis=1)
+    x = np.zeros(Nc, int)
+    cp = (diagr[:,:]!=0).astype(int).nonzero()
+    ci = cp[0]
+    pi = cp[1]
+    x[ci] = pi
+    data += [[list(cx), list(x),0]]
+    
+if train_nn:
+    with open('data-'+figname+'.txt', 'w') as file:
+        for line in data:
+            file.write(str(line)+'\n')
+
+# Check.
+if train_nn:
+    data2 = []
+    with open('data-'+figname+'.txt', 'r') as file:
+        for line in file:
+            line = line.strip()
+            line = line.replace('[','').replace(']','').replace(' ','')
+            line = line.split(',')
+            line = [int(l) for l in line]
+            data2 += [[line[6:12], line[12]]]
