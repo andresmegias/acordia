@@ -13,7 +13,7 @@ Acordia uses the libraries PyYAML, NumPy and Matplotlib, and its neural network 
 **Some examples**
 
 F chord, standard tuning:
-![image1](example-images/table-standard-F.jpg?raw=true)
+![image1](example-images/chart-standard-F.jpg?raw=true)
 
 F chord, all-fourths tuning:
-![image2](example-images/table-allfourths-F.jpg?raw=true)
+![image2](example-images/chart-allfourths-F.jpg?raw=true)
